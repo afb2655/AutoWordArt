@@ -1,5 +1,5 @@
 from datetime import time
-
+from PIL import Image
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
@@ -15,16 +15,16 @@ def mainv1(nicktext):
     Generate = browser.find_element_by_css_selector(".c.bz.cY.S.bU.eg.cu")
     Generate.click()
     browser.fullscreen_window()
+    browser.implicitly_wait(10)
     browser.save_screenshot("nickposting.png")
-    Save = browser.find_element_by_css_selector(".c.S.i.co.aU")
-    Save.click()
-    Title = browser.find_element_by_name("title")
-    Title.send_keys("Nick's Autism")
-    Description = browser.find_element_by_name("description")
-    Description.send_keys("An unholy Rambleing")
-    email = browser.find_element_by_name("email")
-    email.send_keys('a1597579@nwytg.com')
-    email.submit()
+    im = Image.open('nickposting.png')
+    left = 730
+    top = 120
+    right = 1550
+    bottom = 630
+    im = im.crop((left,top,right,bottom))
+    im.save('nickpostings.png')
+
 
 
 def tagcrowdart():
